@@ -13,9 +13,9 @@ str_sub(t2, start = -5, end = -4)
 
 horoskop <- function(imie, miesiac){
   if (miesiac %% 2 == 0) {
-    paste("Osoba o imieniu", imie, "bedzie miala jutro szczescie")
+    cat(paste("Osoba o imieniu", imie, "bedzie miala jutro szczescie"))
   } else {
-    paste("Osoba o imieniu", imie, "bedzie miala jutro nieszczescie")
+    cat(paste("Osoba o imieniu", imie, "bedzie miala jutro nieszczescie"))
   }
 }
 
@@ -27,11 +27,11 @@ horoskop("Malgosia", 7)
 
 horoskop <- function(imie, miesiac){
   if (str_detect(imie, pattern = "^K|M|Z")){
-    paste("Osoba o imieniu", imie, "bedzie miala jutro szczescie")
+    cat(paste("Osoba o imieniu", imie, "bedzie miala jutro szczescie"))
   } else if (miesiac %% 2 == 0){
-    paste("Osoba o imieniu", imie, "bedzie miala jutro szczescie")
+    cat(paste("Osoba o imieniu", imie, "bedzie miala jutro szczescie"))
   } else {
-    paste("Osoba o imieniu", imie, "bedzie miala jutro nieszczescie")
+    cat(paste("Osoba o imieniu", imie, "bedzie miala jutro nieszczescie"))
   }
 }
 
@@ -42,23 +42,20 @@ horoskop("Rafal", 3)
 
   # zadanie 4
 
-
 pomiary <- "2019-03-11: 23.5, 19/03/12: 12.7, 2019.03.13: 11.1, 2019-marzec-14: 14.3"
 
-pomiary <- str_replace_all(pomiary, pattern = "[\\/]", replacement = "\\-")
+#pomiary <- str_replace_all(pomiary, pattern = "[\\/|.]", replacement = "\\-")
 
-str_extract_all(pomiary, pattern = "[0-9]+[\\-][a-z0-9]+[\\-][0-9]*")
+#str_extract_all(pomiary, pattern = "[0-9]+[\\-][a-z0-9]+[\\-][0-9]*")
+
+daty <- str_extract_all(pomiary, pattern = "[0-9]+[\\-|/|.][a-z0-9]+[\\-|/|.][0-9]+")
 
 
   # zadanie 5
 
-wartosci <- str_extract_all(pomiary, pattern = "[0-9]+[\\.][0-9]")
+wartosci <- str_extract_all(pomiary, pattern = "[0-9]+[\\.][0-9]?[^\\,]")
+wartosci <- as.data.frame(wartosci[[1]][-3])
 
-
-
-
-
-
-
-
-
+######
+daty <- as.data.frame(daty[[1]])
+df <- cbind(daty, wartosci)
